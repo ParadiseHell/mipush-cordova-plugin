@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cordova Mipush Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="cordova.js"></script>
+	<script src="js/index.js"></script>
+	<style type="text/css">
+		.panel{
+		margin-top: 50px;
+		}
+		.panel-heading{
+		height: 100px;
+
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Cordova小米推送插件演示</h3>
+			</div>
+			<div class="panel-body" id="register">
+				<label>注册时：</label>
+				<br>
+				regId:
+				<p style="word-break:break-all"></p>
+			</div>
+			<hr>
+			<div class="panel-body" id="reciecer">
+				<label>收到消息时：</label>
+				<br>
+				title:
+				<p style="word-break:break-all"></p>
+				description:
+				<p style="word-break:break-all"></p>
+			</div>
+			<hr>
+			<div class="panel-body" id="click">
+				<label>点击消息时：</label>
+				<br>
+				title:
+				<p style="word-break:break-all"></p>
+				description:
+				<p style="word-break:break-all"></p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
