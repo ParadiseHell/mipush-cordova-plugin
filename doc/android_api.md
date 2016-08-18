@@ -48,7 +48,7 @@
 	window.plugins.MiPushPlugin.notificationMessageArrived.title
 - description(消息摘要):
 	window.plugins.MiPushPlugin.notificationMessageArrived.description
-- your_key(附加字段，一般由后台定义)
+- your_key(附加字段，一般由后台定义):
 	window.plugins.MiPushPlugin.notificationMessageArrived.your_key
 
 #### 获取方法
@@ -75,7 +75,7 @@
 	window.plugins.MiPushPlugin.notificationMessageClicked.title
 - description(消息摘要):
 	window.plugins.MiPushPlugin.notificationMessageClicked.description
-- your_key(附加字段，一般由后台定义)
+- your_key(附加字段，一般由后台定义):
 	window.plugins.MiPushPlugin.notificationMessageClicked.your_key
 
 #### 获取方法
