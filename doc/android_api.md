@@ -96,17 +96,19 @@
 		description = data.description
 		your_key = data.your_key
 
+
 ## 设置Alias
 
 ### API - setAlias
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.setAlias(alias)
+	window.plugins.MiPushPlugin.setAlias(alias)
 
 #### 参数说明
 
 - alias:设置Alias的值(字符串)
+
 
 ## 注销Alias
 
@@ -114,11 +116,12 @@
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.unSetAlias(alias)
+	window.plugins.MiPushPlugin.unSetAlias(alias)
 
 #### 参数说明
 
 - alias:注销Alias的值(字符串)
+
 
 ## 设置userAccount
 
@@ -126,11 +129,12 @@
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.setUserAccount(userAccount)
+	window.plugins.MiPushPlugin.setUserAccount(userAccount)
 
 #### 参数说明
 
 - userAccount:设置userAccount的值(字符串)
+
 
 ## 注销userAccount
 
@@ -138,11 +142,12 @@
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.unSetUserAccount(userAccount)
+	window.plugins.MiPushPlugin.unSetUserAccount(userAccount)
 
 #### 参数说明
 
 - userAccount:注销userAccount的值(字符串)
+
 
 ## 订阅Topic
 
@@ -150,11 +155,12 @@
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.setTopic(topic)
+	window.plugins.MiPushPlugin.setTopic(topic)
 
 #### 参数说明
 
 - topic:订阅Topic的值(字符串)
+
 
 ## 取消Topic
 
@@ -162,7 +168,7 @@
 
 #### 接口定义
 		
-		window.plugins.MiPushPlugin.unSetTopic(topic)
+	window.plugins.MiPushPlugin.unSetTopic(topic)
 
 #### 参数说明
 
