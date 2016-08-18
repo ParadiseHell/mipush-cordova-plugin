@@ -4,12 +4,12 @@
 - [注册成功时获取的内容](#注册成功时获取的内容)
 - [收到消息时获取的内容](#收到消息时获取的内容)
 - [点击消息时获取的内容](#点击消息时获取的内容)
-- [设置Alias](#设置Alias)
-- [注销Alias](#注销Alias)
-- [设置userAccount](#设置userAccount)
-- [注销userAccount](#注销userAccount)
-- [订阅Topic](#订阅Topic)
-- [取消Topic](#取消Topic)
+- [设置 Alias](#设置-Alias)
+- [注销 Alias](#注销-Alias)
+- [设置 userAccount](#设置-userAccount)
+- [注销 userAccount](#注销-userAccount)
+- [订阅 Topic](#订阅-Topic)
+- [取消 Topic](#取消-Topic)
 		
 ## 注册小米推送
 
@@ -97,7 +97,7 @@
 		your_key = data.your_key
 
 
-## 设置Alias
+## 设置 Alias
 
 ### API - setAlias
 
@@ -110,7 +110,7 @@
 - alias:设置Alias的值(字符串)
 
 
-## 注销Alias
+## 注销 Alias
 
 ### API - unSetAlias
 
@@ -123,7 +123,7 @@
 - alias:注销Alias的值(字符串)
 
 
-## 设置userAccount
+## 设置 userAccount
 
 ### API - setUserAccount
 
@@ -136,7 +136,7 @@
 - userAccount:设置userAccount的值(字符串)
 
 
-## 注销userAccount
+## 注销 userAccount
 
 ### API - unSetAlias
 
@@ -149,7 +149,7 @@
 - userAccount:注销userAccount的值(字符串)
 
 
-## 订阅Topic
+## 订阅 Topic
 
 ### API - setTopic
 
@@ -162,7 +162,7 @@
 - topic:订阅Topic的值(字符串)
 
 
-## 取消Topic
+## 取消 Topic
 
 ### API - unSetAlias
 
