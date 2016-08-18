@@ -4,12 +4,12 @@
 - [注册成功时获取的内容](#注册成功时获取的内容)
 - [收到消息时获取的内容](#收到消息时获取的内容)
 - [点击消息时获取的内容](#点击消息时获取的内容)
-- [设置 Alias](#设置-Alias)
-- [注销 Alias](#注销-Alias)
-- [设置 userAccount](#设置-userAccount)
-- [注销 userAccount](#注销-userAccount)
-- [订阅 Topic](#订阅-Topic)
-- [取消 Topic](#取消-Topic)
+- [设置 Alias](#设置-alias)
+- [注销 Alias](#注销-alias)
+- [设置 userAccount](#设置-useraccount)
+- [注销 userAccount](#注销-useraccount)
+- [订阅 Topic](#订阅-topic)
+- [取消 Topic](#取消-topic)
 		
 ## 注册小米推送
 
