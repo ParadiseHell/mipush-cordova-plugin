@@ -107,7 +107,7 @@
 
 #### 参数说明
 
-- alias:设置Alias的值(字符串)
+- alias: 设置Alias的值(字符串)
 
 
 ## 注销 Alias
@@ -120,7 +120,7 @@
 
 #### 参数说明
 
-- alias:注销Alias的值(字符串)
+- alias: 注销Alias的值(字符串)
 
 
 ## 设置 userAccount
@@ -133,12 +133,12 @@
 
 #### 参数说明
 
-- userAccount:设置userAccount的值(字符串)
+- userAccount: 设置userAccount的值(字符串)
 
 
 ## 注销 userAccount
 
-### API - unSetAlias
+### API - unSetUserAccount
 
 #### 接口定义
 		
@@ -146,7 +146,7 @@
 
 #### 参数说明
 
-- userAccount:注销userAccount的值(字符串)
+- userAccount: 注销userAccount的值(字符串)
 
 
 ## 订阅 Topic
@@ -159,12 +159,12 @@
 
 #### 参数说明
 
-- topic:订阅Topic的值(字符串)
+- topic: 订阅Topic的值(字符串)
 
 
 ## 取消 Topic
 
-### API - unSetAlias
+### API - unSetTopic
 
 #### 接口定义
 		
@@ -172,4 +172,4 @@
 
 #### 参数说明
 
-- topic:取消Topic的值(字符串)
+- topic: 取消Topic的值(字符串)
