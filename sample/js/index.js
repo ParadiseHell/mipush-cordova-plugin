@@ -10,19 +10,8 @@ var app = {
     },
     onDeviceReady: function() {
         console.log('onDeviceReady:---------------');
-        //app.receivedEvent('deviceready');
         app.initiateUI();
     },
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-        console.log('Received Event: ' + id);
-    },
-
     initiateUI : function() {
         try {
             console.log("initiateUI");
