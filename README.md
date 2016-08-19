@@ -19,9 +19,9 @@
 
 在插件项目的sample文件夹中包含一个简单的demo，若想参考，具体方法：
 		
-		sample/index.htm--copy-->you_project_path/www/index.html
-		sample/css/*--copy-->you_project_path/www/css/
-		sample/js/*--copy-->you_project_path/www/js/
+		sample/index.htm---->you_project_path/www/index.html
+		sample/css/*---->you_project_path/www/css/
+		sample/js/*---->you_project_path/www/js/
 
 ## 关于 PhoneGap build 云服务
 
