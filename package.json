@@ -1,0 +1,33 @@
+{
+  "name": "mipush-cordova-plugin",
+  "version": "0.0.1",
+  "description": "Cordova MiPush Plugin",
+  "cordova": {
+    "id": "cordova-plugin-mipush",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParadiseHell/mipush-cordova-plugin.git"
+  },
+  "keywords": [
+    "cordova",
+    "mipush",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0"
+    }
+  ],
+  "author": "ChengTao",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/ParadiseHell/mipush-cordova-plugin/issues"
+  },
+  "homepage": "https://github.com/ParadiseHell/mipush-cordova-plugin#readme"
+}

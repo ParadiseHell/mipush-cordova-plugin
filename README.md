@@ -7,6 +7,10 @@
 
 ## 集成步骤
 
+- 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：
+		
+		cordova plugin add mipush-cordova-plugin --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid
+
 - 通过Url安装:
 	
 		cordova plugin add https://github.com/ParadiseHell/mipush-cordova-plugin.git --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid
