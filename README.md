@@ -54,6 +54,14 @@ Cordova CLI 的具体用法可参考 [Cordova CLI 官方文档](https://cordova.
 
   解决方案：Eclipse 中右键单击工程名，Build Path -> Config Build Path -> Projects -> 选中工程名称 -> CordovaLib -> 点击 add。
 
+## 截图
+
+<img src="images/1.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="images/2.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="images/3.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="images/4.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="images/5.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+
 ## 感谢
 
 - [极光推送cordova插件](https://github.com/jpush/jpush-phonegap-plugin)
