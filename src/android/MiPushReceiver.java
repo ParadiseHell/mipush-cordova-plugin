@@ -1,6 +1,7 @@
 package com.ct.cordova.mipush;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.xiaomi.mipush.sdk.ErrorCode;
@@ -42,7 +43,15 @@ public class MiPushReceiver extends PushMessageReceiver {
         mTitle = miPushMessage.getTitle();
         mDescription = miPushMessage.getDescription();
         Log.e("TAG", "onNotificationMessageClicked");
+        MiPushPlugin.openNotificationTitle=mTitle;
+        MiPushPlugin.openNotificationDescription=mDescription;
+        MiPushPlugin.openNotificationExtras=mMessage;
         MiPushPlugin.onNotificationMessageClickedCallBack(mTitle,mDescription,mMessage);
+        Intent launch = context.getPackageManager().getLaunchIntentForPackage(
+            context.getPackageName());
+        launch.addCategory(Intent.CATEGORY_LAUNCHER);
+        launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(launch);
     }
 
     /**

@@ -32,6 +32,9 @@ public class MiPushPlugin extends CordovaPlugin {
     private static String MI_PUSH = "mipush";
     private static Activity activity;
     private static MiPushPlugin instance;
+    public static String openNotificationTitle;
+    public static String openNotificationDescription;
+    public static String openNotificationExtras;
     private final List<String> methodList =
             Arrays.asList(
                     "init",
@@ -56,6 +59,11 @@ public class MiPushPlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         activity = cordova.getActivity();
+        //如果是首次启动，并且点击的通知消息，则处理消息
+        if (openNotificationTitle != null) {
+            onNotificationMessageClickedCallBack(openNotificationTitle, openNotificationDescription,
+                    openNotificationExtras);
+        }
     }
 
     @Override
@@ -111,7 +119,7 @@ public class MiPushPlugin extends CordovaPlugin {
                 e.printStackTrace();
                 callbackContext.error("init:error---"+e.toString());
             }
-            
+
         }
     }
 
@@ -317,6 +325,9 @@ public class MiPushPlugin extends CordovaPlugin {
                 instance.webView.loadUrl("javascript:" + js);
             }
         });
+        MiPushPlugin.openNotificationTitle=null;
+        MiPushPlugin.openNotificationDescription=null;
+        MiPushPlugin.openNotificationExtras=null;
     }
 
     /**
