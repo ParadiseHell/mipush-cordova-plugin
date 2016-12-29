@@ -1,6 +1,10 @@
 {
   "name": "mipush-cordova-plugin",
+<<<<<<< HEAD
   "version": "0.1.0",
+=======
+  "version": "0.0.3",
+>>>>>>> f8d52f97f51f9eb29de355c7532aa7483f53aeb2
   "description": "Cordova MiPush Plugin",
   "cordova": {
     "id": "cordova-plugin-mipush",
