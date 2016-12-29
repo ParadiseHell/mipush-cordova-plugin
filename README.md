@@ -1,10 +1,6 @@
 # Cordova MiPush Plugin
 
-<<<<<<< HEAD
 [![release](https://img.shields.io/badge/release-0.1.0-blue.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)
-=======
-[![release](https://img.shields.io/badge/release-0.0.3-blue.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)
->>>>>>> f8d52f97f51f9eb29de355c7532aa7483f53aeb2
 [![platforms](https://img.shields.io/badge/platforms-Android-lightgrey.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)
 
 支持Android的Cordova小米推送插件
