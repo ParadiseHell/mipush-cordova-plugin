@@ -56,11 +56,11 @@ Cordova CLI 的具体用法可参考 [Cordova CLI 官方文档](https://cordova.
 
 ## 截图
 
-<img src="images/1.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
-<img src="images/2.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
-<img src="images/3.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
-<img src="images/4.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
-<img src="images/5.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="./images/1.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="./images/2.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="./images/3.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="./images/4.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
+<img src="./images/5.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />
 
 ## 感谢
 
