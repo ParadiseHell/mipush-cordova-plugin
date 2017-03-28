@@ -33,3 +33,5 @@
 +(void)onReceiveRegisterResultCallBack:(NSString*)regId;
 
 @end
+
+MiPushPlugin *SharedMiPushPlugin;
