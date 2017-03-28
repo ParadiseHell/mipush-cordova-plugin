@@ -3,21 +3,21 @@
 [![release](https://img.shields.io/badge/release-0.1.0-blue.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)
 [![platforms](https://img.shields.io/badge/platforms-Android-lightgrey.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)
 
-支持Android的Cordova小米推送插件
+支持Android、IOS的Cordova小米推送插件
 
 ## 集成步骤
 
 - 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：
 		
-		cordova plugin add mipush-cordova-plugin --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid
+		cordova plugin add mipush-cordova-plugin --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey
 
 - 通过Url安装:
 	
-		cordova plugin add https://github.com/ParadiseHell/mipush-cordova-plugin.git --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid
+		cordova plugin add https://github.com/ParadiseHell/mipush-cordova-plugin.git --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey
 
 - 或者下载本地安装
 
-		cordova plugin add Your_Plugin_Path --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid
+		cordova plugin add Your_Plugin_Path --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey
 
 ## Demo
 
@@ -40,7 +40,7 @@
 
 ### 具体的 API 请参考：
 
-- [Android API](/doc/android_api.md)
+- [API](/doc/api.md)
 
 ## 常见问题
 
