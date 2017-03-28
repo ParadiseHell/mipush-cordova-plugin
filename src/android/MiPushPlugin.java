@@ -2,9 +2,7 @@ package com.ct.cordova.mipush;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -24,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,6 +34,7 @@ public class MiPushPlugin extends CordovaPlugin {
     public static String openNotificationTitle;
     public static String openNotificationDescription;
     public static String openNotificationExtras;
+    public static Map<String, String> openNotificationExtraMap;
     private final List<String> methodList =
             Arrays.asList(
                     "init",
@@ -62,7 +62,7 @@ public class MiPushPlugin extends CordovaPlugin {
         //如果是首次启动，并且点击的通知消息，则处理消息
         if (openNotificationTitle != null) {
             onNotificationMessageClickedCallBack(openNotificationTitle, openNotificationDescription,
-                    openNotificationExtras);
+                    openNotificationExtras, openNotificationExtraMap);
         }
     }
 
@@ -103,7 +103,7 @@ public class MiPushPlugin extends CordovaPlugin {
      */
     public void init(JSONArray data, CallbackContext callbackContext) {
         if (shouldInit(activity)) {
-            try{
+            try {
                 ApplicationInfo appInfo = activity.getPackageManager()
                         .getApplicationInfo(activity.getPackageName(),
                                 PackageManager.GET_META_DATA);
@@ -111,13 +111,13 @@ public class MiPushPlugin extends CordovaPlugin {
                 String APP_ID = appInfo.metaData.getString("MiPushAppId");
                 APP_KEY = APP_KEY.split(MI_PUSH)[0];
                 APP_ID = APP_ID.split(MI_PUSH)[0];
-                Log.e(TAG,"-------APP_KEY-------"+APP_KEY+"------APP_ID----"+APP_ID);
+                Log.e(TAG, "-------APP_KEY-------" + APP_KEY + "------APP_ID----" + APP_ID);
                 MiPushClient.registerPush(activity, APP_ID, APP_KEY);
                 Log.e(TAG, "-------------init------------------");
                 callbackContext.success();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-                callbackContext.error("init:error---"+e.toString());
+                callbackContext.error("init:error---" + e.toString());
             }
 
         }
@@ -147,8 +147,8 @@ public class MiPushPlugin extends CordovaPlugin {
      * @param callbackContext
      */
     public void showToast(final JSONArray data, final CallbackContext callbackContext) {
-        Log.e(TAG,"------showToast-------");
-        try{
+        Log.e(TAG, "------showToast-------");
+        try {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -160,9 +160,9 @@ public class MiPushPlugin extends CordovaPlugin {
                     }
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("showToast:error---"+e.toString());
+            callbackContext.error("showToast:error---" + e.toString());
         }
     }
 
@@ -177,12 +177,12 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------setAlias-----------");
         try {
             String alias = data.get(0).toString();
-            Log.e(TAG,"-----------alias-------------"+alias);
-            MiPushClient.setAlias(activity,alias,null);
+            Log.e(TAG, "-----------alias-------------" + alias);
+            MiPushClient.setAlias(activity, alias, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("setAlias:error--"+e.toString());
+            callbackContext.error("setAlias:error--" + e.toString());
         }
     }
 
@@ -196,12 +196,12 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------unSetAlias-----------");
         try {
             String alias = data.get(0).toString();
-            Log.e(TAG,"-----------alias-------------"+alias);
-            MiPushClient.unsetAlias(activity,alias,null);
+            Log.e(TAG, "-----------alias-------------" + alias);
+            MiPushClient.unsetAlias(activity, alias, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("unSetAlias:error---"+e.toString());
+            callbackContext.error("unSetAlias:error---" + e.toString());
         }
     }
 
@@ -215,12 +215,12 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------setUserAccount-----------");
         try {
             String userAccount = data.get(0).toString();
-            Log.e(TAG,"-----------userAccount-------------"+userAccount);
-            MiPushClient.setUserAccount(activity,userAccount,null);
+            Log.e(TAG, "-----------userAccount-------------" + userAccount);
+            MiPushClient.setUserAccount(activity, userAccount, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("setUserAccount:error---"+e.toString());
+            callbackContext.error("setUserAccount:error---" + e.toString());
         }
     }
 
@@ -234,12 +234,12 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------unSetUserAccount-----------");
         try {
             String userAccount = data.get(0).toString();
-            Log.e(TAG,"-----------userAccount-------------"+userAccount);
-            MiPushClient.unsetUserAccount(activity,userAccount,null);
+            Log.e(TAG, "-----------userAccount-------------" + userAccount);
+            MiPushClient.unsetUserAccount(activity, userAccount, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("unSetUserAccount:error---"+e.toString());
+            callbackContext.error("unSetUserAccount:error---" + e.toString());
         }
     }
 
@@ -253,12 +253,12 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------setTopic-----------");
         try {
             String topic = data.get(0).toString();
-            Log.e(TAG,"-----------topic-------------"+topic);
+            Log.e(TAG, "-----------topic-------------" + topic);
             MiPushClient.subscribe(activity, topic, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("setTopic:error---"+e.toString());
+            callbackContext.error("setTopic:error---" + e.toString());
         }
     }
 
@@ -272,28 +272,30 @@ public class MiPushPlugin extends CordovaPlugin {
         Log.e(TAG, "---------unSetTopic-----------");
         try {
             String topic = data.get(0).toString();
-            Log.e(TAG,"-----------topic-------------"+topic);
+            Log.e(TAG, "-----------topic-------------" + topic);
             MiPushClient.unsubscribe(activity, topic, null);
             callbackContext.success();
         } catch (Exception e) {
             e.printStackTrace();
-            callbackContext.error("unSetTopic:error---"+e.toString());
+            callbackContext.error("unSetTopic:error---" + e.toString());
         }
     }
 
     /**
      * 接受到消息
+     *
      * @param title
      * @param description
      * @param extras
+     * @param extra
      */
-    public static void onNotificationMessageArrivedCallBack(String title,String description,String extras) {
+    public static void onNotificationMessageArrivedCallBack(String title, String description, String extras, Map<String, String> extra) {
         Log.e(TAG, "-------------onNotificationMessageArrivedCallBack------------------");
         if (instance == null) {
             return;
         }
-        JSONObject object = getNotificationJsonObject(title,description,extras);
-        Log.e(TAG, "-------------onNotificationMessageArrivedCallBack------------------"+object.toString());
+        JSONObject object = getNotificationJsonObject(title, description, extras, extra);
+        Log.e(TAG, "-------------onNotificationMessageArrivedCallBack------------------" + object.toString());
         String format = "window.plugins.MiPushPlugin.onNotificationMessageArrivedCallBack(%s);";
         final String js = String.format(format, object.toString());
         activity.runOnUiThread(new Runnable() {
@@ -306,17 +308,19 @@ public class MiPushPlugin extends CordovaPlugin {
 
     /**
      * 用户点击
+     *
      * @param title
      * @param description
      * @param extras
+     * @param extra
      */
-    public static void onNotificationMessageClickedCallBack(String title,String description,String extras) {
+    public static void onNotificationMessageClickedCallBack(String title, String description, String extraStr, Map<String, String> extra) {
         Log.e(TAG, "-------------onNotificationMessageClickedCallBack------------------");
         if (instance == null) {
             return;
         }
-        JSONObject object = getNotificationJsonObject(title,description,extras);
-        Log.e(TAG, "-------------onNotificationMessageClickedCallBack------------------"+object.toString());
+        JSONObject object = getNotificationJsonObject(title, description, extraStr, extra);
+        Log.e(TAG, "-------------onNotificationMessageClickedCallBack------------------" + object.toString());
         String format = "window.plugins.MiPushPlugin.onNotificationMessageClickedCallBack(%s);";
         final String js = String.format(format, object.toString());
         activity.runOnUiThread(new Runnable() {
@@ -325,9 +329,9 @@ public class MiPushPlugin extends CordovaPlugin {
                 instance.webView.loadUrl("javascript:" + js);
             }
         });
-        MiPushPlugin.openNotificationTitle=null;
-        MiPushPlugin.openNotificationDescription=null;
-        MiPushPlugin.openNotificationExtras=null;
+        MiPushPlugin.openNotificationTitle = null;
+        MiPushPlugin.openNotificationDescription = null;
+        MiPushPlugin.openNotificationExtras = null;
     }
 
     /**
@@ -342,7 +346,7 @@ public class MiPushPlugin extends CordovaPlugin {
         }
         try {
             JSONObject object = new JSONObject();
-            object.put("regId",regId);
+            object.put("regId", regId);
             String format = "window.plugins.MiPushPlugin.onReceiveRegisterResultCallBack(%s);";
             final String js = String.format(format, object.toString());
             activity.runOnUiThread(new Runnable() {
@@ -358,22 +362,31 @@ public class MiPushPlugin extends CordovaPlugin {
 
     /**
      * 获取消息通知的Json对象
+     *
      * @param title
      * @param description
-     * @param extras
+     * @param extraStr
+     * @param extra
      * @return
      */
-    public static JSONObject getNotificationJsonObject(String title,String description,String extras){
+    public static JSONObject getNotificationJsonObject(String title, String description, String extraStr, Map<String, String> extra) {
         JSONObject data = new JSONObject();
         try {
-            data.put("title",title);
-            data.put("description",description);
-            JSONObject extrasObject = new JSONObject(extras);
-            Iterator it = extrasObject.keys();
-            while (it.hasNext()){
-                String key = (String) it.next();
-                String value = extrasObject.getString(key);
-                data.put(key,value);
+            data.put("title", title);
+            data.put("description", description);
+            if (null != extra) {
+                for (Map.Entry<String, String> entry : extra.entrySet()) {
+                    data.put(entry.getKey(), entry.getValue());
+                }
+            }
+            if (null != extraStr && extraStr.indexOf('{') == 0) {
+                JSONObject extrasObject = new JSONObject(extraStr);
+                Iterator it = extrasObject.keys();
+                while (it.hasNext()) {
+                    String key = (String) it.next();
+                    String value = extrasObject.getString(key);
+                    data.put(key, value);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

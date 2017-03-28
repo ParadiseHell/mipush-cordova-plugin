@@ -43,12 +43,13 @@ public class MiPushReceiver extends PushMessageReceiver {
         mTitle = miPushMessage.getTitle();
         mDescription = miPushMessage.getDescription();
         Log.e("TAG", "onNotificationMessageClicked");
-        MiPushPlugin.openNotificationTitle=mTitle;
-        MiPushPlugin.openNotificationDescription=mDescription;
-        MiPushPlugin.openNotificationExtras=mMessage;
-        MiPushPlugin.onNotificationMessageClickedCallBack(mTitle,mDescription,mMessage);
+        MiPushPlugin.openNotificationTitle = mTitle;
+        MiPushPlugin.openNotificationDescription = mDescription;
+        MiPushPlugin.openNotificationExtras = mMessage;
+        MiPushPlugin.openNotificationExtraMap = miPushMessage.getExtra();
+        MiPushPlugin.onNotificationMessageClickedCallBack(mTitle, mDescription, mMessage, miPushMessage.getExtra());
         Intent launch = context.getPackageManager().getLaunchIntentForPackage(
-            context.getPackageName());
+                context.getPackageName());
         launch.addCategory(Intent.CATEGORY_LAUNCHER);
         launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(launch);
@@ -67,7 +68,7 @@ public class MiPushReceiver extends PushMessageReceiver {
         mTitle = miPushMessage.getTitle();
         mDescription = miPushMessage.getDescription();
         Log.e("TAG", "onNotificationMessageArrived");
-        MiPushPlugin.onNotificationMessageArrivedCallBack(mTitle,mDescription,mMessage);
+        MiPushPlugin.onNotificationMessageArrivedCallBack(mTitle, mDescription, mMessage, miPushMessage.getExtra());
     }
 
     /**
