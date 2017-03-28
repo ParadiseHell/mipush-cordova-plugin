@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\SoftWare\\Node.js\\node.exe',
+1 verbose cli   'D:\\SoftWare\\Node.js\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.3
+3 info using node@v6.3.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'D:\\Study\\MyProject\\mipush-cordova-plugin',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\ChengTao\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 info lifecycle mipush-cordova-plugin@0.1.0~prepublish: mipush-cordova-plugin@0.1.0
+11 silly lifecycle mipush-cordova-plugin@0.1.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ 'C:\\Users\\ChengTao\\AppData\\Roaming\\npm-cache\\mipush-cordova-plugin\\0.1.0\\package.tgz',
+12 verbose tar pack   'D:\\Study\\MyProject\\mipush-cordova-plugin' ]
+13 verbose tarball C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package.tgz
+14 verbose folder D:\Study\MyProject\mipush-cordova-plugin
+15 verbose addLocalTarball adding from inside cache C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package.tgz
+16 verbose correctMkdir C:\Users\ChengTao\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+17 silly cache afterAdd mipush-cordova-plugin@0.1.0
+18 verbose afterAdd C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package\package.json not in flight; writing
+19 verbose correctMkdir C:\Users\ChengTao\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+20 verbose afterAdd C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package\package.json written
+21 silly publish { name: 'mipush-cordova-plugin',
+21 silly publish   version: '0.1.0',
+21 silly publish   description: 'Cordova MiPush Plugin',
+21 silly publish   cordova: { id: 'cordova-plugin-mipush', platforms: [ 'android' ] },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/ParadiseHell/mipush-cordova-plugin.git' },
+21 silly publish   keywords: [ 'cordova', 'mipush', 'ecosystem:cordova', 'cordova-android' ],
+21 silly publish   engines: [ { name: 'cordova', version: '>=3.0' } ],
+21 silly publish   author: { name: 'ChengTao' },
+21 silly publish   license: 'Apache 2.0',
+21 silly publish   bugs: { url: 'https://github.com/ParadiseHell/mipush-cordova-plugin/issues' },
+21 silly publish   homepage: 'https://github.com/ParadiseHell/mipush-cordova-plugin#readme',
+21 silly publish   readme: '# Cordova MiPush Plugin\r\n\r\n[![release](https://img.shields.io/badge/release-0.1.0-blue.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)\r\n[![platforms](https://img.shields.io/badge/platforms-Android-lightgrey.svg)](https://github.com/ParadiseHell/mipush-cordova-plugin)\r\n\r\n支持Android、IOS的Cordova小米推送插件\r\n\r\n## 集成步骤\r\n\r\n- 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：\r\n\t\t\r\n\t\tcordova plugin add mipush-cordova-plugin --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey\r\n\r\n- 通过Url安装:\r\n\t\r\n\t\tcordova plugin add https://github.com/ParadiseHell/mipush-cordova-plugin.git --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey\r\n\r\n- 或者下载本地安装\r\n\r\n\t\tcordova plugin add Your_Plugin_Path --variable PACKAGE_NAME=your_android_project_package_name --variable MI_PUSH_APP_KEY=your_mipush_appkey --variable MI_PUSH_APP_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_ID=your_mipush_appid --variable MI_PUSH_APP_IOS_KEY=your_mipush_appkey\r\n\r\n## Demo\r\n\r\n在插件项目的sample文件夹中包含一个简单的demo，若想参考，具体方法：\r\n\t\t\r\n\t\tsample/index.htm---->you_project_path/www/index.html\r\n\t\tsample/css/*---->you_project_path/www/css/\r\n\t\tsample/js/*---->you_project_path/www/js/\r\n\r\n## 关于 PhoneGap build 云服务\r\n\r\n该项目基于 Cordova 实现，目前无法使用 PhoneGap build 云服务进行打包，建议使用本地环境进行打包。\r\n\r\n## API 说明\r\n\r\n插件的 API 在 MiPush.js 文件中，该文件的具体位置如下：\r\n\r\n### Android\r\n\t[Project]/assets/www/plugins/cordova-plugin-mipush/www\r\n\r\n### 具体的 API 请参考：\r\n\r\n- [API](/doc/api.md)\r\n\r\n## 常见问题\r\n\r\n若要使用 CLI 来编译项目，注意应使用 **cordova compile** 而不是 **cordova build** 命令，因为如果修改了插件安装时默认写入到 AndroidManifest.xml\r\n中的代码，cordova build 可能会导致对 AndroidManifest.xml 的修改。\r\nCordova CLI 的具体用法可参考 [Cordova CLI 官方文档](https://cordova.apache.org/docs/en/latest/reference/cordova-cli/index.html)。\r\n\r\n### Android\r\n\r\n- Eclipse 中 import PhoneGap 工程之后出现：*Type CallbackContext cannot be resolved to a type*。\r\n\r\n  解决方案：Eclipse 中右键单击工程名，Build Path -> Config Build Path -> Projects -> 选中工程名称 -> CordovaLib -> 点击 add。\r\n\r\n## 截图\r\n\r\n<img src="./images/1.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />\r\n<img src="./images/2.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />\r\n<img src="./images/3.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />\r\n<img src="./images/4.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />\r\n<img src="./images/5.jpg" width="350" style="margin-right: 10px;border: 1px solid #000000" />\r\n\r\n## 感谢\r\n\r\n- [极光推送cordova插件](https://github.com/jpush/jpush-phonegap-plugin)\r\n\r\n\r\n## 更多\r\n\r\n- 本项目参考极光推送cordova插件编写\r\n- 若有问题，请发我邮件：chengtaolearn@163.com\r\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '36be24e5c36929298210f6905e131c946c54efcf',
+21 silly publish   _id: 'mipush-cordova-plugin@0.1.0',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'f6edf060c1797e520512f1e9bb50faa4ff2714a3',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name mipush-cordova-plugin
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'mipush-cordova-plugin',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'mipush-cordova-plugin',
+26 silly mapToRegistry   name: 'mipush-cordova-plugin',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/mipush-cordova-plugin
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading C:\Users\ChengTao\AppData\Roaming\npm-cache\mipush-cordova-plugin\0.1.0\package.tgz
+30 verbose request uri https://registry.npmjs.org/mipush-cordova-plugin
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 11:49:26
+33 verbose request using bearer token for auth
+34 verbose request id cfcdf572ee3d5a7f
+35 http request PUT https://registry.npmjs.org/mipush-cordova-plugin
+36 http 403 https://registry.npmjs.org/mipush-cordova-plugin
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Tue, 28 Mar 2017 03:49:35 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-lax8642-LAX',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1490672967.799511,VS0,VE8078',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating C:\Users\ChengTao\AppData\Roaming\npm-cache\registry.npmjs.org\mipush-cordova-plugin on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 0.1.0." : mipush-cordova-plugin
+40 verbose stack     at makeError (D:\SoftWare\Node.js\node_modules\npm\node_modules\npm-registry-client\lib\request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (D:\SoftWare\Node.js\node_modules\npm\node_modules\npm-registry-client\lib\request.js:252:14)
+40 verbose stack     at Request._callback (D:\SoftWare\Node.js\node_modules\npm\node_modules\npm-registry-client\lib\request.js:172:14)
+40 verbose stack     at Request.self.callback (D:\SoftWare\Node.js\node_modules\npm\node_modules\request\request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (D:\SoftWare\Node.js\node_modules\npm\node_modules\request\request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (D:\SoftWare\Node.js\node_modules\npm\node_modules\request\request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid mipush-cordova-plugin
+43 verbose cwd D:\Study\MyProject\mipush-cordova-plugin
+44 error Windows_NT 10.0.14393
+45 error argv "D:\\SoftWare\\Node.js\\node.exe" "D:\\SoftWare\\Node.js\\node_modules\\npm\\bin\\npm-cli.js" "publish"
+46 error node v6.3.0
+47 error npm  v3.10.3
+48 error code E403
+49 error "You cannot publish over the previously published version 0.1.0." : mipush-cordova-plugin
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
