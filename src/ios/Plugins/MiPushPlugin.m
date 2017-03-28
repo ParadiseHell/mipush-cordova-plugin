@@ -125,7 +125,12 @@
     NSError *error = nil;
 
     if(data[@"aps"]) {
-        data = data[@"aps"][@"alert"];
+        NSDictionary *alertData = data[@"aps"][@"alert"];
+        if(alertData) {
+            NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:data];
+            [dictionary addEntriesFromDictionary:alertData];
+            data = dictionary;
+        }
     }
 
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data
