@@ -67,48 +67,36 @@ MiPushPlugin.prototype.onNotificationMessageClickedCallBack = function(messageId
 
 /*设置别名*/
 MiPushPlugin.prototype.setAlias = function(alias){
-    if(this.isAndroidDevice()){
-        var data = [alias];
-        this.call_native('setAlias',data,null);
-    }
+    var data = [alias];
+    this.call_native('setAlias',data,null);
 };
 /*取消别名*/
 MiPushPlugin.prototype.unSetAlias = function(alias){
-    if(this.isAndroidDevice()){
-        var data = [alias];
-        this.call_native('unSetAlias',data,null);
-    }
+    var data = [alias];
+    this.call_native('unSetAlias',data,null);
 };
 
 /*设置userAccount*/
 MiPushPlugin.prototype.setUserAccount = function(userAccount){
-    if(this.isAndroidDevice()){
-        var data = [userAccount];
-        this.call_native('setUserAccount',data,null);
-    }
+    var data = [userAccount];
+    this.call_native('setUserAccount',data,null);
 };
 /*取消userAccount*/
 MiPushPlugin.prototype.unSetUserAccount = function(userAccount){
-    if(this.isAndroidDevice()){
-        var data = [userAccount];
-        this.call_native('unSetUserAccount',data,null);
-    }
+    var data = [userAccount];
+    this.call_native('unSetUserAccount',data,null);
 };
 
 /*设置Topic*/
 MiPushPlugin.prototype.setTopic = function(topic){
-    if(this.isAndroidDevice()){
-        var data = [topic];
-        console.log(data);
-        this.call_native('setTopic',data,null);
-    }
+    var data = [topic];
+    console.log(data);
+    this.call_native('setTopic',data,null);
 };
 /*取消userTopic*/
 MiPushPlugin.prototype.unSetTopic = function(topic){
-    if(this.isAndroidDevice()){
-        var data = [topic];
-        this.call_native('unSetTopic',data,null);
-    }
+    var data = [topic];
+    this.call_native('unSetTopic',data,null);
 };
 
 if (!window.plugins) {
