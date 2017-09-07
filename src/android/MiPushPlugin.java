@@ -5,10 +5,12 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
+import com.xiaomi.mipush.sdk.MiPushMessage;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -19,22 +21,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MiPushPlugin extends CordovaPlugin {
+    public static final String CallbackJsName = "callbackJs";
     private static String TAG = "MiPushPlugin";
     private static String MI_PUSH = "mipush";
     private static Activity activity;
     private static MiPushPlugin instance;
-    public static String openNotificationTitle;
-    public static String openNotificationDescription;
-    public static String openNotificationExtras;
-    public static Map<String, String> openNotificationExtraMap;
+
+    private static final List<String> callbackJsQueue = new ArrayList<>();
+    private static boolean hasInit = false;
+
     private final List<String> methodList =
             Arrays.asList(
                     "init",
@@ -59,11 +62,6 @@ public class MiPushPlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         activity = cordova.getActivity();
-        //如果是首次启动，并且点击的通知消息，则处理消息
-        if (openNotificationTitle != null) {
-            onNotificationMessageClickedCallBack(openNotificationTitle, openNotificationDescription,
-                    openNotificationExtras, openNotificationExtraMap);
-        }
     }
 
     @Override
@@ -114,6 +112,7 @@ public class MiPushPlugin extends CordovaPlugin {
                 Log.e(TAG, "-------APP_KEY-------" + APP_KEY + "------APP_ID----" + APP_ID);
                 MiPushClient.registerPush(activity, APP_ID, APP_KEY);
                 Log.e(TAG, "-------------init------------------");
+                hasInit = true;
                 callbackContext.success();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -283,55 +282,20 @@ public class MiPushPlugin extends CordovaPlugin {
 
     /**
      * 接受到消息
-     *
-     * @param title
-     * @param description
-     * @param extras
-     * @param extra
      */
-    public static void onNotificationMessageArrivedCallBack(String title, String description, String extras, Map<String, String> extra) {
+    public static void onNotificationMessageArrivedCallBack(MiPushMessage message) {
         Log.e(TAG, "-------------onNotificationMessageArrivedCallBack------------------");
-        if (instance == null) {
-            return;
-        }
-        JSONObject object = getNotificationJsonObject(title, description, extras, extra);
-        Log.e(TAG, "-------------onNotificationMessageArrivedCallBack------------------" + object.toString());
-        String format = "window.plugins.MiPushPlugin.onNotificationMessageArrivedCallBack(%s);";
-        final String js = String.format(format, object.toString());
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                instance.webView.loadUrl("javascript:" + js);
-            }
-        });
+        JSONObject object = getNotificationJsonObject(message);
+        callbackWithType("notificationMessageArrived", object);
     }
 
     /**
      * 用户点击
-     *
-     * @param title
-     * @param description
-     * @param extras
-     * @param extra
      */
-    public static void onNotificationMessageClickedCallBack(String title, String description, String extraStr, Map<String, String> extra) {
+    public static void onNotificationMessageClickedCallBack(MiPushMessage message) {
         Log.e(TAG, "-------------onNotificationMessageClickedCallBack------------------");
-        if (instance == null) {
-            return;
-        }
-        JSONObject object = getNotificationJsonObject(title, description, extraStr, extra);
-        Log.e(TAG, "-------------onNotificationMessageClickedCallBack------------------" + object.toString());
-        String format = "window.plugins.MiPushPlugin.onNotificationMessageClickedCallBack(%s);";
-        final String js = String.format(format, object.toString());
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                instance.webView.loadUrl("javascript:" + js);
-            }
-        });
-        MiPushPlugin.openNotificationTitle = null;
-        MiPushPlugin.openNotificationDescription = null;
-        MiPushPlugin.openNotificationExtras = null;
+        JSONObject object = getNotificationJsonObject(message);
+        callbackWithType("notificationMessageClicked", object);
     }
 
     /**
@@ -341,52 +305,112 @@ public class MiPushPlugin extends CordovaPlugin {
      */
     public static void onReceiveRegisterResultCallBack(String regId) {
         Log.e(TAG, "-------------onReceiveRegisterResultCallBack------------------" + regId);
-        if (instance == null) {
-            return;
-        }
         try {
             JSONObject object = new JSONObject();
             object.put("regId", regId);
-            String format = "window.plugins.MiPushPlugin.onReceiveRegisterResultCallBack(%s);";
-            final String js = String.format(format, object.toString());
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    instance.webView.loadUrl("javascript:" + js);
-                }
-            });
+            callbackWithType("receiveRegisterResult", object);
+            handleCallbackJsQueue();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 获取消息通知的Json对象
-     *
-     * @param title
-     * @param description
-     * @param extraStr
-     * @param extra
-     * @return
+     * 返回数据到前端
+     * @param type 事件类型
+     * @param data 事件数据
      */
-    public static JSONObject getNotificationJsonObject(String title, String description, String extraStr, Map<String, String> extra) {
+    public static void callbackWithType(String type, Map<String, Object> data) {
+        callbackWithType(type, new JSONObject(data));
+    }
+
+    /**
+     * 返回数据到前端
+     * @param type 事件类型
+     * @param data 事件数据
+     */
+    public static void callbackWithType(final String type, JSONObject data) {
+        Log.e(TAG, "-------------callbackWithType------------------" + type);
+        final String js = getCallbackJS(type, data);
+
+        if (instance != null && hasInit) {
+            Log.e(TAG, "callbackWithType run: " + type);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    instance.webView.loadUrl("javascript:" + js);
+                }
+            });
+        } else {
+            callbackJsQueue.add(js);
+        }
+    }
+
+    private static void handleCallbackJsQueue() {
+        if(!hasInit || callbackJsQueue.isEmpty()) {
+            return;
+        }
+        for (final String js : callbackJsQueue) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    instance.webView.loadUrl("javascript:" + js);
+                }
+            });
+        }
+        callbackJsQueue.clear();
+    }
+
+    /**
+     * 获取消息通知的回调JS
+     * @param type 类型
+     * @param data 数据
+     */
+    private static String getCallbackJS(final String type, JSONObject data) {
+        String format = "cordova.fireDocumentEvent('mipush.%s', %s);";
+        return String.format(format, type, data.toString());
+    }
+
+    /**
+     * 获取消息通知的Json对象
+     * @param message 推送消息
+     */
+    public static JSONObject getNotificationJsonObject(MiPushMessage message) {
         JSONObject data = new JSONObject();
         try {
-            data.put("title", title);
-            data.put("description", description);
-            if (null != extra) {
-                for (Map.Entry<String, String> entry : extra.entrySet()) {
-                    data.put(entry.getKey(), entry.getValue());
+            data.put("messageId", message.getMessageId());
+            data.put("passThrough", message.getPassThrough());
+            data.put("messageType", message.getMessageType());
+            if(!TextUtils.isEmpty(message.getAlias())) {
+                data.put("alias", message.getAlias());
                 }
+
+            if(!TextUtils.isEmpty(message.getUserAccount())) {
+                data.put("user_account", message.getUserAccount());
             }
-            if (null != extraStr && extraStr.indexOf('{') == 0) {
-                JSONObject extrasObject = new JSONObject(extraStr);
-                Iterator it = extrasObject.keys();
-                while (it.hasNext()) {
-                    String key = (String) it.next();
-                    String value = extrasObject.getString(key);
-                    data.put(key, value);
+
+            if(!TextUtils.isEmpty(message.getTopic())) {
+                data.put("topic", message.getTopic());
                 }
+
+            data.put("content", message.getContent());
+            if(!TextUtils.isEmpty(message.getDescription())) {
+                data.put("description", message.getDescription());
+            }
+
+            if(!TextUtils.isEmpty(message.getTitle())) {
+                data.put("title", message.getTitle());
+            }
+
+            data.put("isNotified", message.isNotified());
+            data.put("notifyId", message.getNotifyId());
+            data.put("notifyType", message.getNotifyType());
+            if(!TextUtils.isEmpty(message.getCategory())) {
+                data.put("category", message.getCategory());
+            }
+
+            if(message.getExtra() != null) {
+                data.put("extra", new JSONObject(message.getExtra()));
             }
         } catch (JSONException e) {
             e.printStackTrace();

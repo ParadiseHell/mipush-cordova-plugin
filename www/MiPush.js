@@ -36,35 +36,6 @@ MiPushPlugin.prototype.init = function(){
     this.call_native('init',data,null);
 };
 
-/*小米推送注册成功*/
-MiPushPlugin.prototype.onReceiveRegisterResultCallBack = function(messageId){
-    try {
-        console.log('MiPushPlugin.prototype.onReceiveRegisterResultCallBack');
-        this.receiveRegisterResult = messageId;
-        cordova.fireDocumentEvent('mipush.receiveRegisterResult', this.receiveRegisterResult);
-      } catch(exception) {
-        console.log('MiPushPlugin:onReceiveRegisterResultCallBack ' + exception);
-      }
-};
-/*小米推送注册成功*/
-MiPushPlugin.prototype.onNotificationMessageArrivedCallBack = function(messageId){
-    try {
-        this.notificationMessageArrived = messageId;
-        cordova.fireDocumentEvent('mipush.notificationMessageArrived', this.notificationMessageArrived);
-      } catch(exception) {
-        console.log('MiPushPlugin:onNotificationMessageArrivedCallBack ' + exception);
-      }
-};
-/*小米推送注册成功*/
-MiPushPlugin.prototype.onNotificationMessageClickedCallBack = function(messageId){
-    try {
-        this.notificationMessageClicked = messageId;
-        cordova.fireDocumentEvent('mipush.notificationMessageClicked', this.notificationMessageClicked);
-      } catch(exception) {
-        console.log('MiPushPlugin:onNotificationMessageClickedCallBack ' + exception);
-      }
-};
-
 /*设置别名*/
 MiPushPlugin.prototype.setAlias = function(alias){
     var data = [alias];

@@ -22,7 +22,11 @@
     // 点击通知打开app处理逻辑
     NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(userInfo){
-        NSLog(@"%@", userInfo);
+        NSString *messageId = [userInfo objectForKey:@"_id_"];
+        if (messageId!=nil) {
+            [MiPushSDK openAppNotify:messageId];
+        }
+        NSLog(@"didFinishLaunchingWithOptions: %@", userInfo);
         [MiPushPlugin onNotificationMessageClickedCallBack:userInfo];
     }
 
@@ -55,7 +59,7 @@
 #pragma mark Local And Push Notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    NSLog(@"APNS notify: %@", userInfo);
+    NSLog(@"APNS notify didReceiveRemoteNotification: %@", userInfo);
 
     // 当同时启动APNs与内部长连接时, 把两处收到的消息合并. 通过miPushReceiveNotification返回
     [MiPushSDK handleReceiveRemoteNotification:userInfo];
@@ -66,17 +70,22 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        NSLog(@"APNS notify: %@", userInfo);
+        NSLog(@"APNS notify willPresentNotification: %@", userInfo);
         [MiPushSDK handleReceiveRemoteNotification:userInfo];
     }
     //    completionHandler(UNNotificationPresentationOptionAlert);
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
 }
 
 // 点击通知进入应用
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        NSLog(@"APNS notify: %@", userInfo);
+        NSLog(@"APNS notify didReceiveNotificationResponse: %@", userInfo);
+
+        NSString *messageId = [userInfo objectForKey:@"_id_"];
+        [MiPushSDK openAppNotify:messageId];
+
         [MiPushSDK handleReceiveRemoteNotification:userInfo];
     }
     completionHandler();

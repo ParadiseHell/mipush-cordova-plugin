@@ -1,22 +1,24 @@
 {
-  "name": "mipush-cordova-plugin",
-  "version": "1.0.2",
-  "description": "Cordova MiPush Plugin",
+  "name": "cordova-plugin-mipush",
+  "version": "2.0.0",
+  "description": "Cordova/Phonegap MiPush Plugin",
   "cordova": {
     "id": "cordova-plugin-mipush",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ParadiseHell/mipush-cordova-plugin.git"
+    "url": "git+https://github.com/wenin819/cordova-plugin-mipush.git"
   },
   "keywords": [
     "cordova",
+    "phonegap",
     "mipush",
-    "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "engines": [
     {
@@ -24,10 +26,10 @@
       "version": ">=3.0"
     }
   ],
-  "author": "ChengTao",
+  "author": "https://github.com/wenin819",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/ParadiseHell/mipush-cordova-plugin/issues"
+    "url": "https://github.com/wenin819/cordova-plugin-mipush/issues"
   },
-  "homepage": "https://github.com/ParadiseHell/mipush-cordova-plugin#readme"
+  "homepage": "https://github.com/wenin819/cordova-plugin-mipush#readme"
 }

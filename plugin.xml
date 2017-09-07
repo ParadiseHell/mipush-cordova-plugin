@@ -1,11 +1,11 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-mipush" 
-    version="0.1.0">
+    version="2.0.0">
 
     <name>MiPush</name>
     <description>Cordova MiPush Plugin</description>
-    <author>ChengTao</author>
+    <author>https://github.com/wenin819</author>
     <license>Apache 2.0</license>
     <keywords>cordova,mipush</keywords>
 
@@ -130,7 +130,7 @@
             <meta-data android:name="MiPushAppId" android:value="$MI_PUSH_APP_IDmipush"></meta-data>
         </config-file>
 
-        <source-file src="src/android/MiPush_SDK_Client_3_2_2.jar" target-dir="libs" />
+        <source-file src="src/android/MiPush_SDK_Client_3_4_5.jar" target-dir="libs" />
         <source-file src="src/android/MiPushPlugin.java" target-dir="src/com/ct/cordova/mipush" />
         <source-file src="src/android/MiPushReceiver.java" target-dir="src/com/ct/cordova/mipush" />
         
