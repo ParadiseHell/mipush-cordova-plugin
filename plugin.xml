@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-mipush" 
     version="2.0.0">
-
     <name>MiPush</name>
     <description>Cordova MiPush Plugin</description>
     <author>https://github.com/wenin819</author>
