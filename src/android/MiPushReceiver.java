@@ -17,16 +17,15 @@ import java.util.List;
  */
 @SuppressWarnings("ALL")
 public class MiPushReceiver extends PushMessageReceiver {
+    private static final String TAG = "MiPushReceiver";
     private String mRegId;
-    private String mMessage;
-    private String mTitle;
-    private String mDescription;
 
     /**
      * onReceivePassThroughMessage用来接收服务器发送的透传消息
      */
     @Override
     public void onReceivePassThroughMessage(Context context, MiPushMessage miPushMessage) {
+        Log.d(TAG, "onReceivePassThroughMessage: " + miPushMessage.toString());
         super.onReceivePassThroughMessage(context, miPushMessage);
     }
 
@@ -38,16 +37,8 @@ public class MiPushReceiver extends PushMessageReceiver {
      */
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
-        Log.e("TAG", "onNotificationMessageClicked");
-        mMessage = miPushMessage.getContent();
-        mTitle = miPushMessage.getTitle();
-        mDescription = miPushMessage.getDescription();
-        Log.e("TAG", "onNotificationMessageClicked");
-        MiPushPlugin.openNotificationTitle = mTitle;
-        MiPushPlugin.openNotificationDescription = mDescription;
-        MiPushPlugin.openNotificationExtras = mMessage;
-        MiPushPlugin.openNotificationExtraMap = miPushMessage.getExtra();
-        MiPushPlugin.onNotificationMessageClickedCallBack(mTitle, mDescription, mMessage, miPushMessage.getExtra());
+        Log.d(TAG, "onNotificationMessageClicked: " + miPushMessage.toString());
+        MiPushPlugin.onNotificationMessageClickedCallBack(miPushMessage);
         Intent launch = context.getPackageManager().getLaunchIntentForPackage(
                 context.getPackageName());
         launch.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -63,12 +54,8 @@ public class MiPushReceiver extends PushMessageReceiver {
      */
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage miPushMessage) {
-        Log.e("TAG", "onNotificationMessageArrived");
-        mMessage = miPushMessage.getContent();
-        mTitle = miPushMessage.getTitle();
-        mDescription = miPushMessage.getDescription();
-        Log.e("TAG", "onNotificationMessageArrived");
-        MiPushPlugin.onNotificationMessageArrivedCallBack(mTitle, mDescription, mMessage, miPushMessage.getExtra());
+        Log.d(TAG, "onNotificationMessageArrived: " + miPushMessage.toString());
+        MiPushPlugin.onNotificationMessageArrivedCallBack(miPushMessage);
     }
 
     /**
@@ -79,14 +66,13 @@ public class MiPushReceiver extends PushMessageReceiver {
      */
     @Override
     public void onReceiveRegisterResult(Context context, MiPushCommandMessage miPushCommandMessage) {
-        Log.e("TAG", "onReceiveRegisterResult");
+        Log.d(TAG, "onReceiveRegisterResult: " + miPushCommandMessage.toString());
         String command = miPushCommandMessage.getCommand();
         List<String> arguments = miPushCommandMessage.getCommandArguments();
         String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (miPushCommandMessage.getResultCode() == ErrorCode.SUCCESS) {
                 mRegId = cmdArg1;
-                Log.e("TAG", "onReceiveRegisterResult");
                 MiPushPlugin.onReceiveRegisterResultCallBack(mRegId);
             }
         }
@@ -100,6 +86,7 @@ public class MiPushReceiver extends PushMessageReceiver {
      */
     @Override
     public void onCommandResult(Context context, MiPushCommandMessage miPushCommandMessage) {
+        Log.d(TAG, "onCommandResult: " + miPushCommandMessage.toString());
         super.onCommandResult(context, miPushCommandMessage);
     }
 }

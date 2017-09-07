@@ -32,6 +32,7 @@
 // 小米推送注册成功
 +(void)onReceiveRegisterResultCallBack:(NSString*)regId;
 
++ (void)callbackWithType:(NSString *)type data:(NSDictionary *)data;
 @end
 
 MiPushPlugin *SharedMiPushPlugin;

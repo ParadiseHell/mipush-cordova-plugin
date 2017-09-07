@@ -1,11 +1,10 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="mipush-cordova-plugin" 
-    version="0.1.0">
-
+    id="cordova-plugin-mipush" 
+    version="2.0.0">
     <name>MiPush</name>
     <description>Cordova MiPush Plugin</description>
-    <author>ChengTao</author>
+    <author>https://github.com/wenin819</author>
     <license>Apache 2.0</license>
     <keywords>cordova,mipush</keywords>
 
@@ -13,7 +12,6 @@
         <engine name="cordova" version=">=3.0" />
     </engines>
     
-    <preference name="PACKAGE_NAME" />
     <preference name="MI_PUSH_APP_KEY"/>
     <preference name="MI_PUSH_APP_ID" />
     <preference name="MI_PUSH_APP_IOS_KEY"/>
@@ -74,9 +72,9 @@
             <uses-permission android:name="android.permission.READ_PHONE_STATE" />
             <uses-permission android:name="android.permission.GET_TASKS" />
             <uses-permission android:name="android.permission.VIBRATE"/>
-            <permission android:name="$PACKAGE_NAME.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
+            <permission android:name="${applicationId}.permission.MIPUSH_RECEIVE" android:protectionLevel="signature" />
             <!--这里com.xiaomi.mipushdemo改成app的包名-->
-            <uses-permission android:name="$PACKAGE_NAME.permission.MIPUSH_RECEIVE" />
+            <uses-permission android:name="${applicationId}.permission.MIPUSH_RECEIVE" />
             <!--这里com.xiaomi.mipushdemo改成app的包名-->
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
@@ -131,7 +129,7 @@
             <meta-data android:name="MiPushAppId" android:value="$MI_PUSH_APP_IDmipush"></meta-data>
         </config-file>
 
-        <source-file src="src/android/MiPush_SDK_Client_3_2_2.jar" target-dir="libs" />
+        <source-file src="src/android/MiPush_SDK_Client_3_4_5.jar" target-dir="libs" />
         <source-file src="src/android/MiPushPlugin.java" target-dir="src/com/ct/cordova/mipush" />
         <source-file src="src/android/MiPushReceiver.java" target-dir="src/com/ct/cordova/mipush" />
         

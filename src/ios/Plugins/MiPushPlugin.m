@@ -7,6 +7,9 @@
 
 @implementation MiPushPlugin
 
+static BOOL hasInit = FALSE;
+static NSMutableArray *callbackJsQueue = nil;
+
 - (void)pluginInitialize {
     [super pluginInitialize];
     SharedMiPushPlugin = self;
@@ -17,7 +20,10 @@
     [self.commandDelegate runInBackground:^{
         NSString *regId = [MiPushSDK getRegId];
         if(regId) {
+            hasInit = TRUE;
             [MiPushPlugin onReceiveRegisterResultCallBack:regId];
+            [self handleCallbackJsQueue];
+            [self handleResultWithValue:regId command:command];
         }
     }];
 }
@@ -143,21 +149,31 @@
         json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     NSString *js = [NSString stringWithFormat:@"cordova.fireDocumentEvent('mipush.%@',%@)", type, json];
-    if (SharedMiPushPlugin) {
+
+    if (SharedMiPushPlugin && hasInit) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [SharedMiPushPlugin.commandDelegate evalJs:js];
         });
     } else {
-        [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            if(!SharedMiPushPlugin) {
+        if(callbackJsQueue == nil) {
+            callbackJsQueue = [[NSMutableArray alloc] init];
+        }
+        [callbackJsQueue addObject:js];
+    }
+}
+
+- (void)handleCallbackJsQueue {
+    if(!hasInit || callbackJsQueue == nil) {
                 return;
             }
-            [timer invalidate];
+    for (NSString *js in callbackJsQueue) {
+        NSLog(@"handleCallbackJsQueue js = %@", js);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [SharedMiPushPlugin.commandDelegate evalJs:js];
+            NSLog(@"handleCallbackJsQueue dispatch_async js = %@", js);
+            [self.commandDelegate evalJs:js];
             });
-        }];
     }
+    [callbackJsQueue removeAllObjects];
 }
 
 - (void)handleResultWithValue:(id)value command:(CDVInvokedUrlCommand *)command {
